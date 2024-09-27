@@ -1,4 +1,4 @@
-name: CI
+name: swift-algorithms ci
 on:
   push:
     branches: [ main ]
@@ -7,7 +7,7 @@ on:
     branches:
       - '*'
   schedule:
-    - cron:  '0 6,17 * * *'
+    - cron:  '45 2,13 * * *'
 jobs:
   test:
     runs-on: macos-13
