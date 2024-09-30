@@ -11,8 +11,9 @@ on:
 jobs:
   test:
     strategy:
+      fail-fast: false
       matrix:
-        android-api-level: [34, 32, 30, 29, 28, 27, 26, 25, 24]
+        android-api-level: [25, 28, 29, 30, 31, 33]
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
