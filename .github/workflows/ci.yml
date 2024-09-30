@@ -10,6 +10,9 @@ on:
     - cron:  '45 2,13 * * *'
 jobs:
   test:
+    strategy:
+      matrix:
+        android-api-level: [34, 32, 30, 29, 28, 27, 26, 25, 24]
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
@@ -19,12 +22,14 @@ jobs:
         uses: skiptools/swift-android-action@v1
         with:
           swift-version: '5.10'
+          android-api-level: ${{ matrix.android-api-level }}
       - name: "Cleanup build"
         run: rm -rf .build
       - name: "Test Swift (6.0) Package on Android"
         uses: skiptools/swift-android-action@v1
         with:
           swift-version: '6.0'
+          android-api-level: ${{ matrix.android-api-level }}
       - name: "Test Swift Package on iOS"
         run: xcodebuild test -sdk "iphonesimulator" -destination "platform=iOS Simulator,name=iPhone 15" -scheme "$(xcodebuild -list -json | jq -r '.workspace.schemes[-1]')"
 
