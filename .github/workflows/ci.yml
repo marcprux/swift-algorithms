@@ -14,7 +14,7 @@ jobs:
     #runs-on: macos-15
     runs-on: macos-13
     steps:
-      - uses: ls /Applications
+      - run: ls /Applications
       - uses: actions/checkout@v4
       - name: "Test Swift Package Locally"
         run: swift test
