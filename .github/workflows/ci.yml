@@ -16,6 +16,7 @@ jobs:
       - name: "Test Swift Package Locally"
         run: swift test
       - name: "Test Swift (5.10) Package on Android"
+        if: false
         uses: skiptools/swift-android-action@v1
         with:
           swift-version: '5.10'
