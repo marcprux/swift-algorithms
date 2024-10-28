@@ -17,7 +17,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: "Test Swift Package on Linux"
         run: |
-          brew install docker
+          brew install docker colima
+          colima start
           docker run --rm -v "$PWD":/host -w /host swift:6.0.1 swift test
       - name: "Test Swift Package Locally"
         run: swift test
