@@ -16,7 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: "Test Swift Package on Linux"
-        run: docker run --rm -v "$PWD":/host -w /host swift:6.0.1 swift test
+        run: |
+          brew install docker
+          docker run --rm -v "$PWD":/host -w /host swift:6.0.1 swift test
       - name: "Test Swift Package Locally"
         run: swift test
       - name: "Test Swift (5.10) Package on Android"
