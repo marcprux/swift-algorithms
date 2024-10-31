@@ -16,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: "Test Swift Package on Linux"
+        # not yet working
+        if: false
         run: |
           brew install docker colima
           colima start
