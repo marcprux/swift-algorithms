@@ -10,31 +10,16 @@ on:
     - cron:  '45 2,13 * * *'
 jobs:
   test:
-    # emulator fails to launch with: HVF error: HV_UNSUPPORTED
+    # emulator fails to launch on ARM macOS with: HVF error: HV_UNSUPPORTED
     #runs-on: macos-15
+    # so we need to run on Intel macOS
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
-      - name: "Test Swift Package on Linux"
-        # not yet working
-        if: false
-        run: |
-          brew install docker colima
-          colima start
-          docker run --rm -v "$PWD":/host -w /host swift:6.0.1 swift test
       - name: "Test Swift Package Locally"
         run: swift test
-      - name: "Test Swift (6.0) Package on Android"
+      - name: "Test Swift Package on Android"
         uses: skiptools/swift-android-action@v1
-        with:
-          swift-version: '6.0'
-          #android-emulator-arch: 'arm64-v8a'
-      - name: "Cleanup build"
-        run: rm -rf .build
-      - name: "Test Swift (5.10) Package on Android"
-        uses: skiptools/swift-android-action@v1
-        with:
-          swift-version: '5.10'
       - name: "Test Swift Package on iOS"
         run: xcodebuild test -sdk "iphonesimulator" -destination "platform=iOS Simulator,name=iPhone 15" -scheme "$(xcodebuild -list -json | jq -r '.workspace.schemes[-1]')"
 
