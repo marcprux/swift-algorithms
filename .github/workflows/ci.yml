@@ -35,5 +35,5 @@ jobs:
           branch: swift-6.0.2-release
           tag: 6.0.2-RELEASE
       - name: "Test Swift Package on Windows"
-         run: swift test
+        run: swift test
 
